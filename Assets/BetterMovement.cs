@@ -1,9 +1,13 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BetterMovement : MonoBehaviour
 {
+    public SpriteRenderer sR;
+    public Sprite newSprite;
+    public bool objectToggle;
     [SerializeField]
     LayerMask lmWalls;
     [SerializeField]
@@ -15,9 +19,14 @@ public class BetterMovement : MonoBehaviour
     [SerializeField]
     float fJumpPressedRememberTime = 0.2f;
 
+    
+
     float fGroundedRemember = 0;
     [SerializeField]
     float fGroundedRememberTime = 0.25f;
+
+    [SerializeField]
+    float velocityScaler = 1;
 
     [SerializeField]
     float fHorizontalAcceleration = 1;
@@ -37,7 +46,14 @@ public class BetterMovement : MonoBehaviour
 
     void Start()
     {
+        sR = gameObject.GetComponent<SpriteRenderer>();
+
         rigid = GetComponent<Rigidbody2D>();
+    }
+
+    void ChangeSprite()
+    {
+        sR.sprite = newSprite;
     }
 
     void Update()
@@ -82,7 +98,27 @@ public class BetterMovement : MonoBehaviour
             fHorizontalVelocity *= Mathf.Pow(1f - fHorizontalDampingWhenTurning, Time.deltaTime * 10f);
         else
             fHorizontalVelocity *= Mathf.Pow(1f - fHorizontalDampingBasic, Time.deltaTime * 10f);
+        
+        
 
-        rigid.velocity = new Vector2(fHorizontalVelocity, rigid.velocity.y);
+        rigid.velocity = new Vector2(fHorizontalVelocity * velocityScaler, rigid.velocity.y);
+
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ObjectEnabling.disabled = true;
+            objectToggle = !objectToggle;
+        }
+        
+        
+      
+           
+    }
+
+    private void ChangeSprite(Sprite newSprite)
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            ChangeSprite(newSprite);
+        }
     }
 }
