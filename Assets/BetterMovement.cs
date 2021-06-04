@@ -98,8 +98,8 @@ public class BetterMovement : MonoBehaviour
             fHorizontalVelocity *= Mathf.Pow(1f - fHorizontalDampingWhenTurning, Time.deltaTime * 10f);
         else
             fHorizontalVelocity *= Mathf.Pow(1f - fHorizontalDampingBasic, Time.deltaTime * 10f);
-        
-        
+
+
 
         rigid.velocity = new Vector2(fHorizontalVelocity * velocityScaler, rigid.velocity.y);
 
@@ -108,17 +108,19 @@ public class BetterMovement : MonoBehaviour
             ObjectEnabling.disabled = true;
             objectToggle = !objectToggle;
         }
-        
-        
-      
-           
-    }
 
-    private void ChangeSprite(Sprite newSprite)
-    {
+
+
+
+
+
+
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            ChangeSprite(newSprite);
+            GameManager.playerLoc = transform.position;
+            Debug.Log(GameManager.playerLoc);
         }
     }
+            
+     
 }
