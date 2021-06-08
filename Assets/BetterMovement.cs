@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BetterMovement : MonoBehaviour
 {
+    public Animator animator;
+
     public SpriteRenderer sR;
     public Sprite newSprite;
     public bool objectToggle;
@@ -49,6 +52,8 @@ public class BetterMovement : MonoBehaviour
         sR = gameObject.GetComponent<SpriteRenderer>();
 
         rigid = GetComponent<Rigidbody2D>();
+        Debug.Log("RVelocity" + GameManager.playerVelocity);
+        rigid.velocity = GameManager.playerVelocity;
     }
 
     void ChangeSprite()
@@ -61,6 +66,7 @@ public class BetterMovement : MonoBehaviour
         Vector2 v2GroundedBoxCheckPosition = (Vector2)transform.position + new Vector2(0, -0.01f);
         Vector2 v2GroundedBoxCheckScale = (Vector2)transform.localScale + new Vector2(-3, 3);
         bool bGrounded = Physics2D.OverlapBox(v2GroundedBoxCheckPosition, v2GroundedBoxCheckScale, 3, lmWalls);
+        
 
         fGroundedRemember -= Time.deltaTime;
         if (bGrounded)
@@ -118,8 +124,14 @@ public class BetterMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             GameManager.playerLoc = transform.position;
-            Debug.Log(GameManager.playerLoc);
+            GameManager.playerVelocity = rigid.velocity;
+            Debug.Log(GameManager.playerVelocity);
+            //Debug.Log(GameManager.playerLoc);
+            SceneManager.LoadScene(GameManager.nextScene);
         }
+
+        animator.SetFloat("Speed", Mathf.Abs(fHorizontalVelocity));
+
     }
             
      

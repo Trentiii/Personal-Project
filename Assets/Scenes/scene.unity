@@ -121,6 +121,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &735607122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 735607124}
+  - component: {fileID: 735607123}
+  m_Layer: 0
+  m_Name: SceneSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &735607123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735607122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737d0916517add5418433151637832f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToGoTo: Movement Testing
+--- !u!4 &735607124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 735607122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.4154544, y: 1.951527, z: -37.12888}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &754222853
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,8 +176,6 @@ GameObject:
   - component: {fileID: 754222855}
   - component: {fileID: 754222854}
   - component: {fileID: 754222856}
-  - component: {fileID: 754222858}
-  - component: {fileID: 754222857}
   m_Layer: 8
   m_Name: Box
   m_TagString: Untagged
@@ -231,63 +273,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!66 &754222857
-CompositeCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754222853}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths:
-  - m_Collider: {fileID: 754222856}
-    m_ColliderPaths:
-    - - X: 154791307
-        Y: -10281112
-      - X: 154791307
-        Y: 10281112
-      - X: -154791600
-        Y: 10280819
-      - X: -154791307
-        Y: -10281112
-  m_CompositePaths:
-    m_Paths:
-    - - {x: 15.479101, y: -1.0281112}
-      - {x: 15.479101, y: 1.0281112}
-      - {x: -15.47916, y: 1.0280526}
-      - {x: -15.479101, y: -1.0281112}
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
---- !u!50 &754222858
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754222853}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!1 &883626581
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,7 +501,7 @@ GameObject:
   - component: {fileID: 1875166037}
   - component: {fileID: 1875166041}
   - component: {fileID: 1875166040}
-  - component: {fileID: 1875166043}
+  - component: {fileID: 1875166044}
   m_Layer: 0
   m_Name: PinkHairGirl3-Sheet_0
   m_TagString: Untagged
@@ -668,36 +653,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29e55ffd81b8b5b4da116e0114cc9f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  sR: {fileID: 0}
+  newSprite: {fileID: 0}
+  objectToggle: 0
   lmWalls:
     serializedVersion: 2
     m_Bits: 256
   fJumpVelocity: 5
   fJumpPressedRememberTime: 0.2
   fGroundedRememberTime: 0.25
+  velocityScaler: 1
   fHorizontalAcceleration: 1
   fHorizontalDampingBasic: 0.75
   fHorizontalDampingWhenStopping: 0.75
   fHorizontalDampingWhenTurning: 0.5
   fCutJumpHeight: 0.3
---- !u!66 &1875166043
-CompositeCollider2D:
+--- !u!114 &1875166044
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1875166036}
   m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_GeometryType: 0
-  m_GenerationType: 0
-  m_EdgeRadius: 0
-  m_ColliderPaths: []
-  m_CompositePaths:
-    m_Paths: []
-  m_VertexDistance: 0.0005
-  m_OffsetDistance: 0.00005
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fe6f3cb63ef8f74f84d1cb5a6ade464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
