@@ -8,6 +8,9 @@ public class BetterMovement : MonoBehaviour
 {
     public Animator animator;
 
+    public float coolDownTime = 0.75f;
+    float timeOfSceneEnter;
+
     public SpriteRenderer sR;
     public Sprite newSprite;
     public bool objectToggle;
@@ -54,6 +57,8 @@ public class BetterMovement : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         Debug.Log("RVelocity" + GameManager.playerVelocity);
         rigid.velocity = GameManager.playerVelocity;
+
+        timeOfSceneEnter = Time.time;
     }
 
     void ChangeSprite()
@@ -121,13 +126,15 @@ public class BetterMovement : MonoBehaviour
 
 
 
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && (Time.time - timeOfSceneEnter > coolDownTime))
         {
+
             GameManager.playerLoc = transform.position;
             GameManager.playerVelocity = rigid.velocity;
             Debug.Log(GameManager.playerVelocity);
             //Debug.Log(GameManager.playerLoc);
-            SceneManager.LoadScene(GameManager.nextScene);
+            //SceneManager.LoadScene(GameManager.nextScene);
+            SceneChanger.LoadScene(GameManager.nextScene);
         }
 
         animator.SetFloat("Speed", Mathf.Abs(fHorizontalVelocity));
