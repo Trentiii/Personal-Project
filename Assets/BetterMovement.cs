@@ -15,7 +15,7 @@ public class BetterMovement : MonoBehaviour
     public Sprite newSprite;
     public bool objectToggle;
     [SerializeField]
-    LayerMask lmWalls;
+    LayerMask groundLayer;
     [SerializeField]
     float fJumpVelocity = 5;
 
@@ -68,9 +68,9 @@ public class BetterMovement : MonoBehaviour
 
     void Update()
     {
-        Vector2 v2GroundedBoxCheckPosition = (Vector2)transform.position + new Vector2(0, -0.01f);
+        Vector2 v2GroundedBoxCheckPosition = (Vector2)transform.position + new Vector2(0, 0.7f);
         Vector2 v2GroundedBoxCheckScale = (Vector2)transform.localScale + new Vector2(-3, 3);
-        bool bGrounded = Physics2D.OverlapBox(v2GroundedBoxCheckPosition, v2GroundedBoxCheckScale, 3, lmWalls);
+        bool bGrounded = Physics2D.OverlapBox(v2GroundedBoxCheckPosition, v2GroundedBoxCheckScale, 3, groundLayer);
         
 
         fGroundedRemember -= Time.deltaTime;
@@ -140,6 +140,8 @@ public class BetterMovement : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(fHorizontalVelocity));
 
     }
-            
+    
+
+
      
 }
