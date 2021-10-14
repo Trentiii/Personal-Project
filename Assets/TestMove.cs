@@ -6,7 +6,7 @@ using UnityEngine;
 public class TestMove : MonoBehaviour
 {
 
-
+    public bool canJump;
  
 
 
@@ -50,13 +50,13 @@ public class TestMove : MonoBehaviour
 
         rigid = GetComponent<Rigidbody2D>();
 
-
+        canJump = true;
 
     }
 
     void Update()
     {
-        Vector2 v2GroundedBoxCheckPosition = (Vector2)transform.position + new Vector2(0, 1.5f);
+        Vector2 v2GroundedBoxCheckPosition = (Vector2)transform.position + new Vector2(0, 0.7f);
         Vector2 v2GroundedBoxCheckScale = (Vector2)transform.localScale + new Vector2(-3, 3);
         bool bGrounded = Physics2D.OverlapBox(v2GroundedBoxCheckPosition, v2GroundedBoxCheckScale, 3, groundLayer);
 
@@ -73,19 +73,23 @@ public class TestMove : MonoBehaviour
             fJumpPressedRemember = fJumpPressedRememberTime;
         }
 
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButtonUp("Jump") && canJump == true)
         {
             if (rigid.velocity.y > 0)
             {
                 rigid.velocity = new Vector2(rigid.velocity.x, rigid.velocity.y * fCutJumpHeight);
+                canJump = false;
+                Invoke("ResetJump", 0.3f);
             }
         }
 
-        if ((fJumpPressedRemember > 0) && (fGroundedRemember > 0))
+        if ((fJumpPressedRemember > 0) && (fGroundedRemember > 0) && canJump == true)
         {
             fJumpPressedRemember = 0;
             fGroundedRemember = 0;
             rigid.velocity = new Vector2(rigid.velocity.x, fJumpVelocity);
+            canJump = false;
+            Invoke("ResetJump", 0.3f);
         }
 
         float fHorizontalVelocity = rigid.velocity.x;
@@ -104,5 +108,10 @@ public class TestMove : MonoBehaviour
 
       
 
+    }
+
+    private void ResetJump()
+    {
+        canJump = true;
     }
 }
